@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 import FaArrowCircleOLeft from 'react-icons/lib/fa/arrow-circle-o-left';
 import FaPlay from 'react-icons/lib/fa/play';
@@ -10,8 +9,8 @@ import FaPause from 'react-icons/lib/fa/pause';
 import FaVideoCamera from 'react-icons/lib/fa/video-camera';
 
 class Video extends Component {
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
     this.state = {
       isPlaying: false,
       isFullscreen: false
@@ -19,6 +18,9 @@ class Video extends Component {
   }
   componentDidMount() {
     this.video = document.getElementById('video');
+    this.video.addEventListener('ended', () => {
+      this.props.history.goBack();
+    });
   }
 
   handlePlayPause = () => {
@@ -45,8 +47,6 @@ class Video extends Component {
     }
   };
 
-  handleExitVideo = () => {};
-
   render() {
     const videoStyle = {
       width: '100%',
@@ -58,16 +58,12 @@ class Video extends Component {
       <div className="video">
         <div className="video__mask">
           <Link to={'/'}>
-            <div
-              className="video__button--close"
-              tabIndex={0}
-              role="button"
-              onClick={this.handleExitVideo}
-            >
+            <div className="video__button--close" tabIndex={0} role="button">
               <FaArrowCircleOLeft size={45} />
             </div>
           </Link>
           <video
+            controls
             id="video"
             src="http://d2bqeap5aduv6p.cloudfront.net/project_coderush_640x360_521kbs_56min.mp4"
             style={videoStyle}
@@ -97,14 +93,13 @@ class Video extends Component {
 }
 
 Video.propTypes = {
-  actions: PropTypes.object.isRequired
+  history: PropTypes.object.isRequired
 };
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators({}, dispatch),
     dispatch
   };
 }
 
-export default connect(null, mapDispatchToProps)(Video);
+export default withRouter(connect(null, mapDispatchToProps)(Video));

@@ -1,5 +1,8 @@
 import fetch from 'isomorphic-fetch';
+import { normalize } from 'normalizr';
 
+import { addEntities, loadMoviesSlider } from '../actions';
+import { movieListSchema } from './../../store/schema';
 // Actions
 export const REQUEST_MOVIES = 'accedo-test/movies/REQUEST_MOVIES';
 export const RECEIVE_MOVIES = 'accedo-test/movies/RECEIVE_MOVIES';
@@ -25,8 +28,9 @@ export default function reducer(state = initialState, action) {
         ...state,
         isFetching: false,
         didInvalidate: false,
-        items: action.movies.entries,
-        lastUpdated: action.receivedAt
+        items: action.payload.entries,
+        lastUpdated: action.receivedAt,
+        totalCount: action.payload.totalCount
       };
     default:
       return state;
@@ -43,7 +47,7 @@ export function requestMovies() {
 function receiveMovies(json) {
   return {
     type: RECEIVE_MOVIES,
-    movies: json,
+    payload: json,
     receivedAt: Date.now()
   };
 }
@@ -53,35 +57,13 @@ export function fetchMovies() {
     dispatch(requestMovies());
     return fetch('https://demo2697834.mockable.io/movies')
       .then(response => response.json())
-      .then(json => dispatch(receiveMovies(json)));
-  };
-}
-
-function shouldFetchMovies(state) {
-  const movies = state.movies.entities;
-  if (!movies) {
-    return true;
-  } else if (movies.isFetching) {
-    return false;
-  } else {
-    return movies.didInvalidate;
-  }
-}
-
-export function fetchMoviesIfNeeded() {
-  // Note that the function also receives getState()
-  // which lets you choose what to dispatch next.
-
-  // This is useful for avoiding a network request if
-  // a cached value is already available.
-
-  return (dispatch, getState) => {
-    if (shouldFetchMovies(getState())) {
-      // Dispatch a thunk from thunk!
-      return dispatch(fetchMovies());
-    } else {
-      // Let the calling code know there's nothing to wait for.
-      return Promise.resolve();
-    }
+      .then(json => {
+        console.log(json);
+        const data = normalize(json, movieListSchema);
+        console.log(data);
+        dispatch(addEntities(data.entities));
+        dispatch(receiveMovies(data.result));
+        dispatch(loadMoviesSlider(data.result.entries));
+      });
   };
 }

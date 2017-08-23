@@ -1,30 +1,31 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import logo from '../images/logo.svg';
-import './App.css';
+import { fetchMovies } from '../redux/actions';
 
-import * as MoviesActions from '../redux/movies';
+import Slider from '../components/Slider/Slider';
 
 class Root extends Component {
-  componentDidMount() {
-    this.props.actions.fetchMoviesIfNeeded();
+  componentWillMount() {
+    this.props.actions.fetchMovies();
   }
   render() {
-    return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
+    const { movies } = this.props;
+    if (movies.isFetching) {
+      return <p>Cargando...</p>;
+    } else if (!movies.isFetching && movies.totalCount) {
+      return <Slider />;
+    }
+    return <p>No hay películas</p>;
   }
 }
+
+Root.propTypes = {
+  actions: PropTypes.object.isRequired,
+  movies: PropTypes.object.isRequired
+};
 
 function mapStateToProps(state) {
   return {
@@ -34,7 +35,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators({ ...MoviesActions }, dispatch),
+    actions: bindActionCreators({ fetchMovies }, dispatch),
     dispatch
   };
 }

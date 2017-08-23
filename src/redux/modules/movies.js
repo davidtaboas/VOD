@@ -58,9 +58,7 @@ export function fetchMovies() {
     return fetch('https://demo2697834.mockable.io/movies')
       .then(response => response.json())
       .then(json => {
-        console.log(json);
         const data = normalize(json, movieListSchema);
-        console.log(data);
         dispatch(addEntities(data.entities));
         dispatch(receiveMovies(data.result));
         dispatch(loadMoviesSlider(data.result.entries));

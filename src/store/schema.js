@@ -14,7 +14,7 @@ const parentalRatingSchema = new schema.Entity(
   { idAttribute: 'scheme' }
 );
 
-const imageSchema = new schema.Entity('images');
+// const imageSchema = new schema.Entity('images');
 
 const categorySchema = new schema.Entity('categories');
 

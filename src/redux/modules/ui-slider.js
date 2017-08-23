@@ -16,14 +16,12 @@ const initialState = {
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case LOAD_MOVIES_SLIDER: {
-      console.log(action.payload);
-      let currentItems = action.payload.slice(
+      const currentItems = action.payload.slice(
         state.currentPosition,
         state.showItems
       );
       currentItems.unshift(action.payload.last());
       currentItems.push(action.payload[state.showItems]);
-      console.log(action.payload);
       return {
         ...state,
         items: action.payload,
@@ -31,13 +29,13 @@ export default function reducer(state = initialState, action) {
       };
     }
     case NEXT_SLIDE: {
-      let currentPosition =
+      const currentPosition =
         state.currentPosition < state.showItems - 1
           ? state.currentPosition + 1
           : state.showItems - 1;
-      let currentIndex = (state.currentIndex + 1) % state.items.length;
-      let auxItems = [...state.items, ...state.items];
-      let currentItems = auxItems.slice(
+      const currentIndex = (state.currentIndex + 1) % state.items.length;
+      const auxItems = [...state.items, ...state.items];
+      const currentItems = auxItems.slice(
         currentIndex,
         currentIndex + state.showItems
       );
@@ -51,7 +49,7 @@ export default function reducer(state = initialState, action) {
       };
     }
     case PREV_SLIDE: {
-      let currentPosition =
+      const currentPosition =
         state.currentPosition > 0 ? state.currentPosition - 1 : 0;
       let currentIndex = (state.currentIndex - 1) % state.items.length;
       let currentItems = [];

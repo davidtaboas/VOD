@@ -33,6 +33,7 @@ $slider__item__artwork--padding: 67.50788644% 0 !default;
     display: flex;
     color: $slider__nav--color;
     background: $slider__nav--background;
+    user-select: none;
     cursor: pointer;
     &:hover{
       background: $slider__nav--background--hover;
@@ -81,6 +82,8 @@ $slider__item__artwork--padding: 67.50788644% 0 !default;
       right: 0;
       background: linear-gradient(180deg, transparent, #141414);
       margin: 0;
+      color: #FFF;
+      font-weight: bold;
     }
   }
 }

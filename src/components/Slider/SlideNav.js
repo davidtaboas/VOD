@@ -6,23 +6,19 @@ import { bindActionCreators } from 'redux';
 import FaAngleRight from 'react-icons/lib/fa/angle-right';
 import FaAngleLeft from 'react-icons/lib/fa/angle-left';
 
-import SlideItem from './SlideItem';
 import { nextSlide, prevSlide } from './../../redux/actions';
 
 class SlideNav extends Component {
-  constructor(props, context) {
-    super(props, context);
-    console.log(props);
-  }
-
   actionSlide = () => {
-    this.props.action === 'prev'
-      ? this.props.actions.prevSlide()
-      : this.props.actions.nextSlide();
+    if (this.props.action === 'prev') {
+      this.props.actions.prevSlide();
+    } else {
+      this.props.actions.nextSlide();
+    }
   };
 
   render() {
-    const { movie, action } = this.props;
+    const { action } = this.props;
     return (
       <span
         className={`slider__nav slider__nav--${action}`}

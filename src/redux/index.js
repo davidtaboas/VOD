@@ -6,7 +6,11 @@ import slider from './modules/ui-slider';
 
 import { ADD_ENTITIES } from './actions';
 
-function entities(state = null, action) {
+const initialState = {
+  movies: []
+};
+
+function entities(state = initialState, action) {
   switch (action.type) {
     case ADD_ENTITIES:
       return action.payload;

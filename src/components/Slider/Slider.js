@@ -1,28 +1,24 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { nextSlide, prevSlide } from './../../redux/actions';
 import './Slider.scss';
 
 import SlideItem from './SlideItem';
 import SlideNav from './SlideNav';
 
-class Slider extends Component {
-  constructor(props, context) {
-    super(props, context);
-    console.log(props);
-  }
+class Slider extends PureComponent {
   render() {
-    const { slider, movies } = this.props;
-    if (slider.items.length) {
+    const { slider, movies, entities } = this.props;
+    if (movies.isFetching) {
+      return <p>Cargando...</p>;
+    } else if (!movies.isFetching && movies.totalCount) {
       return (
         <div className="slider">
           <SlideNav action="prev" />
           <div className="sliderMask">
             <div className="slider__content">
               {slider.currentItems.map(item =>
-                <SlideItem movie={movies[item]} />
+                <SlideItem key={item} movie={entities.movies[item]} />
               )}
             </div>
           </div>
@@ -30,28 +26,22 @@ class Slider extends Component {
         </div>
       );
     }
-
     return <p>No hay películas</p>;
   }
 }
 
 Slider.propTypes = {
   slider: PropTypes.object.isRequired,
-  movies: PropTypes.array.isRequired
+  entities: PropTypes.object.isRequired,
+  movies: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
   return {
     slider: state.ui.slider,
-    movies: state.entities.movies
+    entities: state.entities,
+    movies: state.movies
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators({ nextSlide }, dispatch),
-    dispatch
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Slider);
+export default connect(mapStateToProps, null)(Slider);

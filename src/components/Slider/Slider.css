@@ -16,6 +16,7 @@
   display: flex;
   color: #fff;
   background: rgba(20, 20, 20, 0.5);
+  user-select: none;
   cursor: pointer;
 }
 .slider__nav:hover {
@@ -65,4 +66,6 @@
   right: 0;
   background: linear-gradient(180deg, transparent, #141414);
   margin: 0;
+  color: #fff;
+  font-weight: bold;
 }

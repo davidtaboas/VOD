@@ -1,15 +1,16 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 
 import Slider from '../components/Slider/Slider';
+import Header from '../components/Header/Header';
 
-class Home extends PureComponent {
-  render() {
-    return (
-      <div>
-        <Slider />
-      </div>
-    );
-  }
-}
+const Home = () => {
+  const page = (
+    <div>
+      <Header />
+      <Slider />
+    </div>
+  );
+  return page;
+};
 
 export default Home;

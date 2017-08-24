@@ -7,7 +7,7 @@ class SlideItem extends PureComponent {
   render() {
     const { movie, showTitle } = this.props;
     const styleItem = {
-      backgroundImage: `url(${movie.images[0].url})`
+      backgroundImage: `url(${movie.images[0].url})`,
     };
     return (
       <Link to={`/watch/${movie.id}`}>
@@ -16,8 +16,8 @@ class SlideItem extends PureComponent {
             <div className="slider__item__artwork" style={styleItem} />
             {showTitle
               ? <p className="slider__item__title">
-                  {movie.title}
-                </p>
+                {movie.title}
+              </p>
               : null}
           </div>
         </div>
@@ -28,16 +28,16 @@ class SlideItem extends PureComponent {
 
 SlideItem.propTypes = {
   movie: PropTypes.object.isRequired,
-  showTitle: PropTypes.bool
+  showTitle: PropTypes.bool,
 };
 
 SlideItem.defaultProps = {
-  showTitle: true
+  showTitle: true,
 };
 
 function mapStateToProps(state) {
   return {
-    images: state.entities.images
+    images: state.entities.images,
   };
 }
 

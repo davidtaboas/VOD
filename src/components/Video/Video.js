@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 
 import FaArrowCircleOLeft from 'react-icons/lib/fa/arrow-circle-o-left';
@@ -13,7 +12,7 @@ class Video extends Component {
     super(props, context);
     this.state = {
       isPlaying: false,
-      isFullscreen: false
+      isFullscreen: false,
     };
   }
   componentDidMount() {
@@ -26,12 +25,12 @@ class Video extends Component {
   handlePlayPause = () => {
     if (this.state.isPlaying) {
       this.setState({
-        isPlaying: false
+        isPlaying: false,
       });
       this.video.pause();
     } else {
       this.setState({
-        isPlaying: true
+        isPlaying: true,
       });
       this.video.play();
     }
@@ -51,7 +50,7 @@ class Video extends Component {
     const videoStyle = {
       width: '100%',
       height: '100%',
-      position: 'absolute'
+      position: 'absolute',
     };
     const { isPlaying } = this.state;
     return (
@@ -63,11 +62,12 @@ class Video extends Component {
             </div>
           </Link>
           <video
-            controls
             id="video"
             src="http://d2bqeap5aduv6p.cloudfront.net/project_coderush_640x360_521kbs_56min.mp4"
             style={videoStyle}
-          />
+          >
+            <track kind="captions" />
+          </video>
           <div className="video__controls">
             <a
               className="video__controls__button video__controls__button--play"
@@ -93,13 +93,7 @@ class Video extends Component {
 }
 
 Video.propTypes = {
-  history: PropTypes.object.isRequired
+  history: PropTypes.object.isRequired,
 };
 
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatch
-  };
-}
-
-export default withRouter(connect(null, mapDispatchToProps)(Video));
+export default withRouter(Video);

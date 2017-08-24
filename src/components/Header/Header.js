@@ -1,14 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-class Header extends Component {
-  constructor(props, context) {
-    super(props, context);
-    console.log('algo');
-  }
-
-  render() {
-    return <div />;
-  }
-}
+const Header = () => {
+  const component = (
+    <div className="header">
+      <h1>Accedo Web Programming Test</h1>
+      <Link to={'/history'}>
+        Historial
+      </Link>
+    </div>
+  );
+  return component;
+};
 
 export default Header;

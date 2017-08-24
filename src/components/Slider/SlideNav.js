@@ -6,14 +6,14 @@ import { bindActionCreators } from 'redux';
 import FaAngleRight from 'react-icons/lib/fa/angle-right';
 import FaAngleLeft from 'react-icons/lib/fa/angle-left';
 
-import { nextSlide, prevSlide } from './../../redux/actions';
+import { selectPrev, selectNext } from './../../redux/actions';
 
 class SlideNav extends Component {
   actionSlide = () => {
     if (this.props.action === 'prev') {
-      this.props.actions.prevSlide();
+      this.props.actions.selectPrev();
     } else {
-      this.props.actions.nextSlide();
+      this.props.actions.selectNext();
     }
   };
 
@@ -36,19 +36,19 @@ class SlideNav extends Component {
 
 SlideNav.propTypes = {
   action: PropTypes.string.isRequired,
-  actions: PropTypes.object.isRequired
+  actions: PropTypes.object.isRequired,
 };
 
 function mapStateToProps(state) {
   return {
-    images: state.entities.images
+    images: state.entities.images,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators({ nextSlide, prevSlide }, dispatch),
-    dispatch
+    actions: bindActionCreators({ selectPrev, selectNext }, dispatch),
+    dispatch,
   };
 }
 

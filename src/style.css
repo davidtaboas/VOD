@@ -39,12 +39,33 @@ html, body {
 a {
   color: #FFF; }
 
+.page {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  outline: none; }
+
+.header {
+  padding: 20px 0;
+  text-align: center; }
+  .header h1 {
+    font-size: 2em;
+    font-weight: bold;
+    padding: 1em 0; }
+  .header--link {
+    text-decoration: none; }
+    .header--link span {
+      padding: 3px 5px; }
+
 .slider {
   margin: 0;
   touch-action: pan-y;
   padding: 0 4%;
   z-index: 2;
-  position: relative; }
+  position: relative;
+  overflow: hidden; }
   .slider__nav {
     position: absolute;
     top: 0;
@@ -73,7 +94,12 @@ a {
     position: relative;
     white-space: normal;
     vertical-align: top;
-    width: 25%; }
+    width: 25%;
+    opacity: 0.5; }
+    .slider__item:hover {
+      opacity: 1; }
+    .slider__item--selected {
+      opacity: 0.8; }
     .slider__item__container {
       display: block;
       margin: 0 2px;
@@ -132,3 +158,23 @@ a {
     display: flex; }
     .video__controls__button {
       margin: 0 10%; }
+
+.history__button--close {
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin: 20px;
+  cursor: pointer;
+  z-index: 105; }
+
+.history__list {
+  width: 214px;
+  margin: 20px auto; }
+  .history__list--item {
+    margin: 20px 0;
+    text-align: center; }
+    .history__list--item--image {
+      margin-bottom: 10px; }
+    .history__list--item--title {
+      font-weight: bold;
+      padding: 5px; }

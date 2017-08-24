@@ -2,6 +2,8 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Moment from 'react-moment';
+
 import FaArrowCircleOLeft from 'react-icons/lib/fa/arrow-circle-o-left';
 
 
@@ -15,10 +17,14 @@ class History extends PureComponent {
             <FaArrowCircleOLeft size={45} />
           </div>
         </Link>
-        <ul>
+        <ul className="history__list">
           { Object.keys(movies).length ?
             history.map(item => (
-              <li>{item.video} - {item.viewedAt}</li>
+              <li key={item.viewedAt} className="history__list--item">
+                <img className="history__list--item--image" src={movies[item.video].images[0].url} alt={item.video} />
+                <p className="history__list--item--title">{movies[item.video].title}</p>
+                <p className="history__list--item--date"><Moment format="YYYY/MM/DD HH:mm" date={item.viewedAt} /></p>
+              </li>
             ))
             : null
           }

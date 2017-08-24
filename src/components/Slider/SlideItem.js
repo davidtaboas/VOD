@@ -5,13 +5,13 @@ import { Link } from 'react-router-dom';
 
 class SlideItem extends PureComponent {
   render() {
-    const { movie, showTitle } = this.props;
+    const { movie, showTitle, selected } = this.props;
     const styleItem = {
       backgroundImage: `url(${movie.images[0].url})`,
     };
     return (
       <Link to={`/watch/${movie.id}`}>
-        <div className="slider__item">
+        <div className={`slider__item ${selected ? 'slider__item--selected' : ''}`}>
           <div className="slider__item__container">
             <div className="slider__item__artwork" style={styleItem} />
             {showTitle
@@ -29,10 +29,12 @@ class SlideItem extends PureComponent {
 SlideItem.propTypes = {
   movie: PropTypes.object.isRequired,
   showTitle: PropTypes.bool,
+  selected: PropTypes.bool,
 };
 
 SlideItem.defaultProps = {
   showTitle: true,
+  selected: false,
 };
 
 function mapStateToProps(state) {

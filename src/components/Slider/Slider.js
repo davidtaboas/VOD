@@ -14,7 +14,7 @@ class Slider extends PureComponent {
         <SlideNav action="prev" />
         <div className="sliderMask">
           <div className="slider__content">
-            {slider.currentItems.map((item, index) =>
+            {slider.currentItems.map((item, index) => // list of items to show on slider
               (<SlideItem
                 key={item}
                 movie={entities.movies[item]}

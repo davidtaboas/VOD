@@ -54,13 +54,18 @@ function receiveMovies(json) {
 
 export function fetchMovies() {
   return (dispatch) => {
+    // Set state as fetching data
     dispatch(requestMovies());
     return fetch('https://demo2697834.mockable.io/movies')
-      .then(response => response.json())
+      .then(response => response.json()) // Parse data to json
       .then((json) => {
+        // Normalize data
         const data = normalize(json, movieListSchema);
+        // Add entities recognized
         dispatch(addEntities(data.entities));
+        // Add movies
         dispatch(receiveMovies(data.result));
+        // Start slider
         dispatch(loadMoviesSlider(data.result.entries));
       });
   };

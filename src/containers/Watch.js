@@ -8,6 +8,7 @@ import Video from '../components/Video/Video';
 
 class Watch extends PureComponent {
   componentWillMount() {
+    // Register new video viewed and launch the action for save
     this.videoID = this.props.match.params.videoID;
     this.props.dispatch(newVideoViewed(this.videoID));
   }

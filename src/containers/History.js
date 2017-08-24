@@ -18,15 +18,18 @@ class History extends PureComponent {
           </div>
         </Link>
         <ul className="history__list">
-          { Object.keys(movies).length ?
-            history.map(item => (
-              <li key={item.viewedAt} className="history__list--item">
-                <img className="history__list--item--image" src={movies[item.video].images[0].url} alt={item.video} />
-                <p className="history__list--item--title">{movies[item.video].title}</p>
-                <p className="history__list--item--date"><Moment format="YYYY/MM/DD HH:mm" date={item.viewedAt} /></p>
-              </li>
-            ))
-            : null
+          {
+            // not show if movies no have items
+            // list of history items
+            Object.keys(movies).length ?
+              history.map(item => (
+                <li key={item.viewedAt} className="history__list--item">
+                  <img className="history__list--item--image" src={movies[item.video].images[0].url} alt={item.video} />
+                  <p className="history__list--item--title">{movies[item.video].title}</p>
+                  <p className="history__list--item--date"><Moment format="YYYY/MM/DD HH:mm" date={item.viewedAt} /></p>
+                </li>
+              ))
+              : null
           }
         </ul>
       </div>

@@ -17,6 +17,7 @@ const initialState = {
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case LOAD_MOVIES_SLIDER: {
+      // Set items to show on page
       const currentItems = action.payload.slice(
         state.currentPosition,
         state.showItems,
@@ -30,6 +31,7 @@ export default function reducer(state = initialState, action) {
       };
     }
     case MOVE_POSITION: {
+      // Update position of selected item on page
       let currentPosition = state.currentPosition;
       if (action.payload < 0) {
         currentPosition = currentPosition ? currentPosition + action.payload : 0;
@@ -43,6 +45,7 @@ export default function reducer(state = initialState, action) {
       };
     }
     case NEXT_SLIDE: {
+      // Move items on slider
       const currentIndex = (state.currentIndex + 1) % state.items.length;
       const auxItems = [...state.items, ...state.items];
       const currentItems = auxItems.slice(
@@ -58,6 +61,7 @@ export default function reducer(state = initialState, action) {
       };
     }
     case PREV_SLIDE: {
+      // Move items on slider
       let currentIndex = state.currentIndex - 1;
       let currentItems = [];
       if (currentIndex < 1) {
@@ -109,6 +113,7 @@ function movePosition(amount) {
 }
 
 export function selectNext() {
+  // Check position of slider and move items and update position
   return (dispatch, getState) => {
     if (getState().ui.slider.currentPosition === (getState().ui.slider.showItems - 1)) {
       dispatch(nextSlide());
@@ -119,6 +124,7 @@ export function selectNext() {
 }
 
 export function selectPrev() {
+  // Check position of slider and move items and update position
   return (dispatch, getState) => {
     if (!getState().ui.slider.currentPosition) {
       dispatch(prevSlide());

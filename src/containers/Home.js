@@ -9,6 +9,7 @@ import Header from '../components/Header/Header';
 
 import { selectPrev, selectNext } from '../redux/actions';
 
+// name of maps for key pressed when the component is focused
 const keyMap = {
   enter: 'enter',
   moveLeft: 'left',
@@ -17,6 +18,7 @@ const keyMap = {
 
 class Home extends PureComponent {
   componentDidMount() {
+    // Whith this I tried auto-focus on component when component is ready, but not work properly
     this.layout.focus();
   }
   handleMoveLeft = () => {
@@ -30,6 +32,7 @@ class Home extends PureComponent {
   }
 
   render() {
+    // Functions for keys pressed
     const handlers = {
       enter: () => this.handleEnter(),
       moveLeft: () => this.handleMoveLeft(),

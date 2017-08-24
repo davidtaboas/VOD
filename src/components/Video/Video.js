@@ -10,13 +10,16 @@ import FaVideoCamera from 'react-icons/lib/fa/video-camera';
 class Video extends Component {
   constructor(props, context) {
     super(props, context);
+    // State of this component
     this.state = {
       isPlaying: false,
       isFullscreen: false,
     };
   }
+
   componentDidMount() {
     this.video = document.getElementById('video');
+    // Listener for go previous page when video is finished
     this.video.addEventListener('ended', () => {
       this.props.history.goBack();
     });

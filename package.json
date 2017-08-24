@@ -2,6 +2,10 @@
   "name": "accedo-test",
   "version": "0.1.0",
   "private": true,
+  "author": {
+    "name" : "David Táboas",
+    "email" : "david.taboas.glez@gmail.com"
+  },
   "dependencies": {
     "es6-promise": "^4.1.1",
     "husky": "^0.14.3",
@@ -49,5 +53,9 @@
     "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-react": "^7.3.0",
     "prettier-eslint": "^6.4.2"
+  },
+  "engines" : {
+    "node" : "~6.10.0",
+    "npm": "~3.10.10"
   }
 }

@@ -11,9 +11,11 @@ const HISTORY_KEY = 'videoHistory';
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case FETCH_VIDEO_HISTORY: {
-      return JSON.parse(sessionStorage.getItem(HISTORY_KEY));
+      // Return the array saved from sessionStorage to state
+      return JSON.parse(sessionStorage.getItem(HISTORY_KEY)) || state;
     }
     case NEW_VIDEO_VIEWED: {
+      // Push a new video at the begin of array
       const newState = [
         {
           video: action.payload,
@@ -21,6 +23,7 @@ export default function reducer(state = initialState, action) {
         },
         ...state,
       ];
+      // Save on sessionStorage the array as string
       sessionStorage.setItem(HISTORY_KEY, JSON.stringify(newState));
       return newState;
     }

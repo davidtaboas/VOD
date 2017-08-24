@@ -16,9 +16,11 @@ require('./helpers');
 
 const store = configureStore();
 
+// Init data on load
 store.dispatch(fetchMovies());
 store.dispatch(fetchHistory());
 
+// Init store and routing
 render(
   <Provider store={store}>
     <BrowserRouter>

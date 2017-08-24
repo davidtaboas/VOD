@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 class SlideItem extends PureComponent {
   render() {
     const { movie, showTitle, selected } = this.props;
+    // Style for show image of movie
     const styleItem = {
       backgroundImage: `url(${movie.images[0].url})`,
     };

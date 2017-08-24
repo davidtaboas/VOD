@@ -2,31 +2,60 @@
   "name": "accedo-test",
   "version": "0.1.0",
   "private": true,
+  "author": {
+    "name" : "David Táboas",
+    "email" : "david.taboas.glez@gmail.com"
+  },
   "dependencies": {
     "es6-promise": "^4.1.1",
     "husky": "^0.14.3",
     "isomorphic-fetch": "^2.2.1",
     "lint-staged": "^4.0.3",
+    "moment": "^2.18.1",
+    "node-sass-chokidar": "0.0.3",
+    "normalizr": "^3.2.3",
+    "npm-run-all": "^4.0.2",
     "prettier": "^1.5.3",
+    "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+    "react-hotkeys": "^0.10.0",
+    "react-icons": "^2.2.5",
+    "react-moment": "^0.6.4",
     "react-redux": "^5.0.6",
     "react-router": "^4.1.2",
+    "react-router-dom": "^4.1.2",
     "react-scripts": "1.0.11",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build-css": "node-sass-chokidar src/ -o src/",
+    "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
+    "start-js": "react-scripts start",
+    "start": "npm-run-all -p watch-css start-js",
+    "build": "npm run build-css && react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "src/**/*.{js,jsx,json,css}": [
-      "prettier --single-quote --write",
+    "src/**/*.{js,jsx}": [
+      "eslint --fix",
       "git add"
     ]
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.2.3",
+    "eslint": "^4.5.0",
+    "eslint-config-airbnb": "^15.1.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
+    "eslint-plugin-react": "^7.3.0",
+    "prettier-eslint": "^6.4.2"
+  },
+  "engines" : {
+    "node" : "~6.10.0",
+    "npm": "~3.10.10"
   }
 }

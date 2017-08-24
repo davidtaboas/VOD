@@ -1,0 +1,97 @@
+$slider--margin: 0 !default;
+$slider--padding: 0 4% !default;
+$slider--zIndex: 2 !default;
+
+$slider__nav--width: 4% !default;
+$slider__nav--top: 0 !default;
+$slider__nav--bottom: 0 !default;
+$slider__nav--zIndex: 20 !default;
+$slider__nav--text-align: center !default;
+$slider__nav--color: #FFF !default;
+$slider__nav--background: rgba(20,20,20,.5) !default;
+$slider__nav--background--hover: rgba(20,20,20,.7) !default;
+
+$slider__item--height: 317px !default;
+$slider__item--width: 25% !default;
+
+$slider__item__artwork--padding: 67.50788644% 0 !default;
+
+.slider {
+  margin: 0;
+  touch-action: pan-y;
+  padding: $slider--padding;
+  z-index: $slider--zIndex;
+  position: relative;
+  overflow: hidden;
+  &__nav {
+    position: absolute;
+    top: $slider__nav--top;
+    bottom: $slider__nav--bottom;
+    z-index: $slider__nav--zIndex;
+    width: $slider__nav--width;
+    text-align: $slider__nav--text-align;
+    justify-content: $slider__nav--text-align;
+    display: flex;
+    color: $slider__nav--color;
+    background: $slider__nav--background;
+    user-select: none;
+    cursor: pointer;
+    &:hover{
+      background: $slider__nav--background--hover;
+    }
+    &--prev {
+      left: 0;
+    }
+    &--next {
+      right: 0;
+    }
+  }
+  &__content {
+    white-space: nowrap;
+    transform: translate3d(-25%, 0px, 0px);
+  }
+  &__item {
+    z-index: 1;
+    display: inline-block;
+    position: relative;
+    white-space: normal;
+    vertical-align: top;
+    width: $slider__item--width;
+    opacity: 0.5;
+    &:hover{
+      opacity: 1;
+    }
+    &--selected {
+      opacity: 0.8;
+    }
+    &__container {
+      display: block;
+      margin: 0 2px;
+      z-index: 1;
+      cursor: pointer;
+      outline: 0;
+      background: linear-gradient(70deg, yellow, white);
+    }
+    &__artwork {
+      background-repeat: no-repeat;
+      background-position: 50% 50%;
+      background-size: 100% 100%;
+      width: 100%;
+      padding: $slider__item__artwork--padding;
+    }
+    &__title {
+      padding: 5px;
+      text-align: center;
+      white-space: normal;
+      position: absolute;
+      bottom: 0;
+      white-space: normal;
+      left: 0;
+      right: 0;
+      background: linear-gradient(180deg, transparent, #141414);
+      margin: 0;
+      color: #FFF;
+      font-weight: bold;
+    }
+  }
+}

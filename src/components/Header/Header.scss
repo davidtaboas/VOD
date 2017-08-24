@@ -1,0 +1,22 @@
+$header--padding: 20px 0 !default;
+$header--text-align: center !default;
+$header--h1--font-size: 2em !default;
+$header--h1--font-weigth: bold !default;
+$header--h1--padding: 1em 0 !default;
+$header--link--span--padding: 3px 5px !default;
+
+.header{
+  padding: $header--padding;
+  text-align: $header--text-align;
+  h1{
+    font-size: $header--h1--font-size;
+    font-weight: $header--h1--font-weigth;
+    padding: $header--h1--padding;
+  }
+  &--link {
+    text-decoration: none;
+    span {
+      padding: $header--link--span--padding;
+    }
+  }
+}

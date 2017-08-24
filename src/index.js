@@ -1,11 +1,36 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { browserHistory } from 'react-router';
-import Root from './containers/Root';
+import { Provider } from 'react-redux';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+
+import Home from './containers/Home';
+import Watch from './containers/Watch';
+import History from './containers/History';
 import registerServiceWorker from './registerServiceWorker';
 import configureStore from './store/configureStore';
 
+import { fetchMovies, fetchHistory } from './redux/actions';
+import './style.css';
+
+require('./helpers');
+
 const store = configureStore();
 
-render(<Root store={store} />, document.getElementById('root'));
+// Init data on load
+store.dispatch(fetchMovies());
+store.dispatch(fetchHistory());
+
+// Init store and routing
+render(
+  <Provider store={store}>
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/watch/:videoID" component={Watch} />
+        <Route path="/history" component={History} />
+      </Switch>
+    </BrowserRouter>
+  </Provider>,
+  document.getElementById('root'),
+);
 registerServiceWorker();

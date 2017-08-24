@@ -8,39 +8,37 @@ import SlideNav from './SlideNav';
 
 class Slider extends PureComponent {
   render() {
-    const { slider, movies, entities } = this.props;
-    if (movies.isFetching) {
-      return <p>Cargando...</p>;
-    } else if (!movies.isFetching && movies.totalCount) {
-      return (
-        <div className="slider">
-          <SlideNav action="prev" />
-          <div className="sliderMask">
-            <div className="slider__content">
-              {slider.currentItems.map(item =>
-                <SlideItem key={item} movie={entities.movies[item]} />
-              )}
-            </div>
+    const { slider, entities } = this.props;
+    return (
+      <div className="slider">
+        <SlideNav action="prev" />
+        <div className="sliderMask">
+          <div className="slider__content">
+            {slider.currentItems.map((item, index) =>
+              (<SlideItem
+                key={item}
+                movie={entities.movies[item]}
+                selected={(index - 1) === slider.currentPosition}
+              />),
+            )}
           </div>
-          <SlideNav action="next" />
         </div>
-      );
-    }
-    return <p>No hay películas</p>;
+        <SlideNav action="next" />
+      </div>
+    );
   }
 }
 
 Slider.propTypes = {
   slider: PropTypes.object.isRequired,
   entities: PropTypes.object.isRequired,
-  movies: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
   return {
     slider: state.ui.slider,
     entities: state.entities,
-    movies: state.movies
+    movies: state.movies,
   };
 }
 

@@ -48,6 +48,15 @@ html, body {
 a {
   color: #FFF;
 }
-
+.page{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  outline: none;
+}
+@import './components/Header/Header.scss';
 @import './components/Slider/Slider.scss';
 @import './components/Video/Video.scss';
+@import './containers/History.scss';

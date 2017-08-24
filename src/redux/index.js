@@ -3,11 +3,12 @@ import { combineReducers } from 'redux';
 // Import reducers
 import movies from './modules/movies';
 import slider from './modules/ui-slider';
+import history from './modules/history';
 
 import { ADD_ENTITIES } from './actions';
 
 const initialState = {
-  movies: []
+  movies: [],
 };
 
 function entities(state = initialState, action) {
@@ -22,9 +23,10 @@ function entities(state = initialState, action) {
 const rootReducer = combineReducers({
   entities,
   movies,
+  history,
   ui: combineReducers({
-    slider
-  })
+    slider,
+  }),
 });
 
 export default rootReducer;

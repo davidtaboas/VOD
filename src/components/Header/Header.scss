@@ -1,0 +1,15 @@
+.header{
+  padding: 20px 0;
+  text-align: center;
+  h1{
+    font-size: 2em;
+    font-weight: bold;
+    padding: 1em 0;
+  }
+  &--link {
+    text-decoration: none;
+    span {
+      padding: 3px 5px;
+    }
+  }
+}

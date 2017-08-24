@@ -1,0 +1,19 @@
+.history__button--close {
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin: 20px;
+  cursor: pointer;
+  z-index: 105; }
+
+.history__list {
+  width: 214px;
+  margin: 20px auto; }
+  .history__list--item {
+    margin: 20px 0;
+    text-align: center; }
+    .history__list--item--image {
+      margin-bottom: 10px; }
+    .history__list--item--title {
+      font-weight: bold;
+      padding: 5px; }

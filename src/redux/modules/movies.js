@@ -12,7 +12,7 @@ const initialState = {
   totalCount: 0,
   isFetching: false,
   didInvalidate: false,
-  items: []
+  items: [],
 };
 
 // Reducer
@@ -21,7 +21,7 @@ export default function reducer(state = initialState, action) {
     case REQUEST_MOVIES:
       return Object.assign({}, state, {
         isFetching: true,
-        didInvalidate: false
+        didInvalidate: false,
       });
     case RECEIVE_MOVIES:
       return {
@@ -30,7 +30,7 @@ export default function reducer(state = initialState, action) {
         didInvalidate: false,
         items: action.payload.entries,
         lastUpdated: action.receivedAt,
-        totalCount: action.payload.totalCount
+        totalCount: action.payload.totalCount,
       };
     default:
       return state;
@@ -40,7 +40,7 @@ export default function reducer(state = initialState, action) {
 // Functions
 export function requestMovies() {
   return {
-    type: REQUEST_MOVIES
+    type: REQUEST_MOVIES,
   };
 }
 
@@ -48,16 +48,16 @@ function receiveMovies(json) {
   return {
     type: RECEIVE_MOVIES,
     payload: json,
-    receivedAt: Date.now()
+    receivedAt: Date.now(),
   };
 }
 
 export function fetchMovies() {
-  return dispatch => {
+  return (dispatch) => {
     dispatch(requestMovies());
     return fetch('https://demo2697834.mockable.io/movies')
       .then(response => response.json())
-      .then(json => {
+      .then((json) => {
         const data = normalize(json, movieListSchema);
         dispatch(addEntities(data.entities));
         dispatch(receiveMovies(data.result));
